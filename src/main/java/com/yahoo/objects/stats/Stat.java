@@ -16,7 +16,7 @@ public class Stat
 {
     private int table_stat_id;
     String stat_id;
-    private Double value;
+    private String value;
 
     
 
@@ -39,11 +39,11 @@ public class Stat
     }
 
 
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }
