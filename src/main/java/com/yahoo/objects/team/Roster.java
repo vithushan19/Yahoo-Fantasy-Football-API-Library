@@ -10,7 +10,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
  *
  * @author cedric
  */
-@JsonIgnoreProperties({"coverage_type"})
+@JsonIgnoreProperties({"coverage_type", "date"})
 public class Roster 
 {
     private String coverage_type;

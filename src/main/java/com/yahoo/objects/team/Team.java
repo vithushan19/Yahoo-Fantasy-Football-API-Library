@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author cedric
  */
-@JsonIgnoreProperties({"managers"})
+@JsonIgnoreProperties({"managers", "team_stats"})
 public class Team 
 {
     private String gameKey;
@@ -39,6 +39,7 @@ public class Team
     private TeamPoints team_points;
     private TeamPoints team_projected_points;
     private String league_scoring_type;
+    private float games_back;
 
 
     public String getTeam_key() {

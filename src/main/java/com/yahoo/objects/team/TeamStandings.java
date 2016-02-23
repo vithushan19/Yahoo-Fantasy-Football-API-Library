@@ -19,6 +19,7 @@ public class TeamStandings
   private TeamStreak streak;
   private String points_for;
   private String points_against;
+  private String games_back;
 
   private TeamDivisionalStandingsList divisional_outcome_totals;
 
@@ -69,6 +70,16 @@ public class TeamStandings
     public void setDivisional_outcome_totals(TeamDivisionalStandingsList divisional_outcome_totals) {
         this.divisional_outcome_totals = divisional_outcome_totals;
     }
+
+
+    public String getGames_back() {
+        return games_back;
+    }
+
+    public void setGames_back(String games_back) {
+        this.games_back = games_back;
+    }
+
 
 
     public static class TeamOutcome {

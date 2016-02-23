@@ -8,10 +8,7 @@ import com.yahoo.utils.json.JacksonPojoMapper;
 import com.yahoo.utils.yql.YQLQueryUtil;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,10 +33,10 @@ public class LeagueService extends BaseService
         {
             ObjectMapper mapper = new ObjectMapper();
             Map<String,Object> results = performYQLQuery(ql); //result details
-            List<Map<String, Object>> leaugeList = (List<Map<String, Object>>)results.get("league"); //result details
-            for (Map map : leaugeList)
+            Set<Map.Entry<String, Object>> leaugeList = results.entrySet(); //result details
+            for (Map.Entry<String, Object> map : leaugeList)
             {
-                League tempLeauge = mapper.readValue(JacksonPojoMapper.toJson(map, false) , League.class);
+                League tempLeauge = mapper.readValue(JacksonPojoMapper.toJson(map.getValue(), false) , League.class);
                 leagueListResults.add(tempLeauge);
             }
 
