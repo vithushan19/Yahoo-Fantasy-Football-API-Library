@@ -89,13 +89,6 @@ public class Demo
                     System.out.println();
                 }
 
-                List<TeamStat> teamStats = teamService.getWeeklyTeamPointsForSeason(demoTeam.getTeam_key());
-                System.out.println("Team weekly points are:");
-                for(TeamStat teamStat : teamStats)
-                {
-                    System.out.println("Week : " + teamStat.getTeam_points().getWeek()+" Projected pts. : "+
-                            " Actual pts. : "+ teamStat.getTeam_points().getTotal());
-                }
                 List<RosterStats> rosterStatsList = teamService.getWeeklyTeamRosterPoints(demoTeam.getTeam_key(), 1);
                 for(RosterStats rosterStat : rosterStatsList)
                 {
