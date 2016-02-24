@@ -5,14 +5,18 @@
 package com.yahoo.objects.stats;
 
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import java.io.Serializable;
 
 /**
  *
  * @author DMDD
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 
-public class Stat 
+public class Stat implements Serializable
 {
     private int table_stat_id;
     String stat_id;

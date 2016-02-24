@@ -1,8 +1,9 @@
 package com.yahoo.services;
 
-import com.yahoo.objects.league.League;
-import com.yahoo.objects.league.LeagueSettings;
+import com.yahoo.objects.league.*;
 import com.yahoo.objects.league.transactions.*;
+import com.yahoo.objects.stats.Stat;
+import com.yahoo.objects.team.Team;
 import com.yahoo.objects.team.TeamStandings;
 import com.yahoo.utils.json.JacksonPojoMapper;
 import com.yahoo.utils.yql.YQLQueryUtil;
@@ -17,6 +18,8 @@ import java.util.logging.Logger;
  */
 public class LeagueService extends BaseService
 {
+
+    private static final int NUM_OF_CATEGORIES = 9;
 
     protected LeagueService(YQLQueryUtil yqlUitl)
     {
@@ -181,8 +184,6 @@ public class LeagueService extends BaseService
         LeagueScoreboard result = new LeagueScoreboard();
         try
         {
-
-
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> results = performYQLQuery(yql);
             Map leagueMap = (Map<String, Object>)results.get("league"); //result details
@@ -195,6 +196,31 @@ public class LeagueService extends BaseService
         }
 
         return result;
+    }
+
+    public List<Stat> getWeeklyStatsForTeam(LeagueScoreboard leagueScoreboard, String teamId) {
+        List<LeagueMatchup> leagueMatchups = leagueScoreboard.getMatchups().getMatchup();
+        for (LeagueMatchup leagueMatchup : leagueMatchups) {
+            if (leagueMatchup.getTeams().getTeam().size() >= 2) {
+                Team team1 = leagueMatchup.getTeams().getTeam().get(0);
+                Team team2 = leagueMatchup.getTeams().getTeam().get(1);
+                if (team1.getTeam_key().equals(teamId)) {
+                    return team1.getTeam_stats().getStats().getStats();
+                } else if (team2. getTeam_key().equals(teamId)) {
+                    return team2.getTeam_stats().getStats().getStats();
+                }
+            }
+        }
+        return null;
+    }
+
+    public Map<String, StatCategory> getLeagueCategories(String leagueId) {
+        Map<String, String> leagueCategories = new LinkedHashMap<String, String>(NUM_OF_CATEGORIES);
+        LeagueSettings leagueSettings = getLeagueSettings(leagueId);
+
+        LeagueStatCategories leagueStatCategories = leagueSettings.getStat_categories();
+        StatCategoriesObj stats = leagueStatCategories.getStats();
+        return stats.getStatCategoryMap();
     }
 
 }

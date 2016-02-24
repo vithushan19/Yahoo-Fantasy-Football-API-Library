@@ -1,16 +1,20 @@
 package com.yahoo.objects.team;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import java.io.Serializable;
 
 /**
  * Created by cedric on 10/29/14.
  */
-public class TeamPoints implements Serializable
+public class TeamStats implements Serializable
 {
     private String coverage_type;
     private String week;
     private String season;
-    private String total;
+
+    @JsonProperty("stats")
+    private MatchupStatsList stats;
 
     public String getCoverage_type() {
         return coverage_type;
@@ -28,19 +32,19 @@ public class TeamPoints implements Serializable
         this.week = week;
     }
 
+    public MatchupStatsList getStats() {
+        return stats;
+    }
+
+    public void setStats(MatchupStatsList stats) {
+        this.stats = stats;
+    }
+
     public String getSeason() {
         return season;
     }
 
     public void setSeason(String season) {
         this.season = season;
-    }
-
-    public String getTotal() {
-        return total;
-    }
-
-    public void setTotal(String total) {
-        this.total = total;
     }
 }

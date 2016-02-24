@@ -1,11 +1,8 @@
 package com.yahoo.services;
 
-import com.yahoo.objects.league.League;
-import com.yahoo.objects.players.Player;
 import com.yahoo.objects.team.Roster;
 import com.yahoo.objects.team.RosterStats;
 import com.yahoo.objects.team.Team;
-import com.yahoo.objects.team.TeamStat;
 import com.yahoo.utils.json.JacksonPojoMapper;
 import com.yahoo.utils.yql.YQLQueryUtil;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -92,28 +89,6 @@ public class TeamService extends BaseService
         return result;
     }
 
-    public List<TeamStat> getWeeklyTeamPointsForSeason(String teamKey)
-    {
-        List<TeamStat> result = new LinkedList<TeamStat>();
-        String yql = "select team_points,team_projected_points from fantasysports.teams.stats where team_key='"+teamKey+"' " +
-                "and stats_type='week' and stats_week in('1', '2', '3','4','5','6','7','8','9','10','11','12','13','14','15','16','17')";
-        ObjectMapper mapper = new ObjectMapper();
-        try
-        {
-            Map<String, Object> results = performYQLQuery(yql); //result details
-            List<Map<String, Object>> statList = (List<Map<String, Object>>) results.get("team"); //result details
-            for (Map statMap : statList)
-            {
-                result.add(mapper.readValue(JacksonPojoMapper.toJson(statMap, false), TeamStat.class));
-            }
-        }
-        catch(Exception e)
-        {
-            Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        return result;
-    }
     public List<RosterStats> getWeeklyTeamRosterPoints(String teamKey, int week)
     {
         List<RosterStats> result = new LinkedList<RosterStats>();

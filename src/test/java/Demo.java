@@ -4,9 +4,6 @@ import com.yahoo.objects.league.*;
 import com.yahoo.objects.league.transactions.LeagueTransaction;
 import com.yahoo.objects.league.transactions.TransactionPlayersList;
 import com.yahoo.objects.players.Player;
-import com.yahoo.objects.stats.SeasonStat;
-import com.yahoo.objects.stats.Stat;
-import com.yahoo.objects.stats.StatsList;
 import com.yahoo.objects.team.*;
 import com.yahoo.services.LeagueService;
 import com.yahoo.services.PlayerService;
@@ -14,7 +11,6 @@ import com.yahoo.services.TeamService;
 import com.yahoo.services.YahooServiceFactory;
 import com.yahoo.services.enums.ServiceType;
 import com.yahoo.utils.oauth.OAuthConnection;
-import com.yahoo.utils.yql.YQLQueryUtil;
 
 import java.util.List;
 import java.awt.Desktop;
@@ -92,6 +88,7 @@ public class Demo
                     System.out.println("Stats for "+ p.getName().getFull());
                     System.out.println();
                 }
+
                 List<TeamStat> teamStats = teamService.getWeeklyTeamPointsForSeason(demoTeam.getTeam_key());
                 System.out.println("Team weekly points are:");
                 for(TeamStat teamStat : teamStats)

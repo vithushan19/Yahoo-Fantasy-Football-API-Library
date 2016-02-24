@@ -8,14 +8,15 @@ import com.yahoo.objects.players.Player;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author cedric
  */
-@JsonIgnoreProperties({"managers", "team_stats"})
-public class Team 
+@JsonIgnoreProperties({"managers"})
+public class Team implements Serializable
 {
     private String gameKey;
     private String leaugeid;
@@ -37,6 +38,7 @@ public class Team
     private List<Player> teamPlayers;
     private TeamStandings team_standings;
     private TeamPoints team_points;
+    private TeamStats team_stats;
     private TeamPoints team_projected_points;
     private String league_scoring_type;
     private float games_back;
@@ -140,7 +142,7 @@ public class Team
         return name;
     }
 
-    private static class TeamLogo {
+    private static class TeamLogo implements Serializable{
         private TeamLogoObject team_logo;
 
         public TeamLogoObject getTeam_logo() {
@@ -153,7 +155,7 @@ public class Team
         
     }
 
-    private static class TeamLogoObject 
+    private static class TeamLogoObject implements Serializable
     {
         private String size;
         private String url;
@@ -176,7 +178,7 @@ public class Team
         
     }
 
-    private static class RosterAdds 
+    private static class RosterAdds implements Serializable
     {
 
         private String coverage_type;
@@ -351,6 +353,14 @@ public class Team
 
     public void setTeam_points(TeamPoints team_points) {
         this.team_points = team_points;
+    }
+
+    public TeamStats getTeam_stats() {
+        return team_stats;
+    }
+
+    public void setTeam_stats(TeamStats team_stats) {
+        this.team_stats = team_stats;
     }
 
     public TeamStandings getTeam_standings() {
