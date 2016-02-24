@@ -82,8 +82,9 @@ public class TeamStandings implements Serializable
     }
 
 
-
+    
     public static class TeamOutcome implements Serializable{
+
         private String wins;
         private String losses;
         private String ties;

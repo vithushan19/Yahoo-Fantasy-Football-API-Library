@@ -1,11 +1,10 @@
 import com.yahoo.engine.YahooFantasyEngine;
 import com.yahoo.objects.api.YahooApiInfo;
-import com.yahoo.objects.league.*;
-import com.yahoo.objects.league.transactions.LeagueScoreboard;
+import com.yahoo.objects.league.League;
+import com.yahoo.objects.league.LeagueSettings;
 import com.yahoo.objects.league.transactions.LeagueTransaction;
 import com.yahoo.objects.league.transactions.TransactionPlayersList;
 import com.yahoo.objects.players.Player;
-import com.yahoo.objects.stats.Stat;
 import com.yahoo.objects.team.*;
 import com.yahoo.services.LeagueService;
 import com.yahoo.services.PlayerService;
@@ -33,7 +32,6 @@ public class MatchupDemo
         YahooApiInfo info =
                 new YahooApiInfo("dj0yJmk9SG1OeGxuQUhCdWxKJmQ9WVdrOVdGWkJOSEJDTldFbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1lNw--",
                         "8e6b6c1e5f2d1f4e3b4fd74d428ae38c7a02a8e9");
-
         YahooFantasyEngine engine = new YahooFantasyEngine(info);
         OAuthConnection oAuthConn = YahooFantasyEngine.getoAuthConn();
         YahooServiceFactory factory = YahooFantasyEngine.getServiceFactory();
