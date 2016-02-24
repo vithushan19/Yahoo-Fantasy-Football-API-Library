@@ -43,6 +43,7 @@ public class LeagueSettings
       private String uses_negative_points;
       private String draft_pick_time;
       private String has_multiweek_championship;
+    private String max_weekly_adds;
 
       private LeagueRosterPositionList roster_positions;
       private LeagueDivisionList divisions;
@@ -333,5 +334,13 @@ public class LeagueSettings
 
     public void setHas_multiweek_championship(String has_multiweek_championship) {
         this.has_multiweek_championship = has_multiweek_championship;
+    }
+
+    public String getMax_weekly_adds() {
+        return max_weekly_adds;
+    }
+
+    public void setMax_weekly_adds(String max_weekly_adds) {
+        this.max_weekly_adds = max_weekly_adds;
     }
 }

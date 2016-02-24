@@ -1,9 +1,11 @@
 package com.yahoo.objects.team;
 
+import java.io.Serializable;
+
 /**
  * Created by cedric on 10/29/14.
  */
-public class TeamPoints
+public class TeamPoints implements Serializable
 {
     private String coverage_type;
     private String week;

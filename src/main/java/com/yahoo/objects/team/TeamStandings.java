@@ -6,19 +6,21 @@ package com.yahoo.objects.team;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author cedric
  */
-public class TeamStandings 
+public class TeamStandings implements Serializable
 {
   private String rank;
   private TeamOutcome outcome_totals;
   private TeamStreak streak;
   private String points_for;
   private String points_against;
+  private String games_back;
 
   private TeamDivisionalStandingsList divisional_outcome_totals;
 
@@ -71,7 +73,17 @@ public class TeamStandings
     }
 
 
-    public static class TeamOutcome {
+    public String getGames_back() {
+        return games_back;
+    }
+
+    public void setGames_back(String games_back) {
+        this.games_back = games_back;
+    }
+
+
+
+    public static class TeamOutcome implements Serializable{
         private String wins;
         private String losses;
         private String ties;

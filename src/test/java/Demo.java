@@ -4,9 +4,6 @@ import com.yahoo.objects.league.*;
 import com.yahoo.objects.league.transactions.LeagueTransaction;
 import com.yahoo.objects.league.transactions.TransactionPlayersList;
 import com.yahoo.objects.players.Player;
-import com.yahoo.objects.stats.SeasonStat;
-import com.yahoo.objects.stats.Stat;
-import com.yahoo.objects.stats.StatsList;
 import com.yahoo.objects.team.*;
 import com.yahoo.services.LeagueService;
 import com.yahoo.services.PlayerService;
@@ -14,7 +11,6 @@ import com.yahoo.services.TeamService;
 import com.yahoo.services.YahooServiceFactory;
 import com.yahoo.services.enums.ServiceType;
 import com.yahoo.utils.oauth.OAuthConnection;
-import com.yahoo.utils.yql.YQLQueryUtil;
 
 import java.util.List;
 import java.awt.Desktop;
@@ -32,8 +28,8 @@ public class Demo
     {
         // TODO Probably want to config this out
         YahooApiInfo info =
-                new YahooApiInfo("dj0yJmk9MWNNeHFyMVZneFdFJmQ9WVdrOVNqVm9hSGQ2TXpZbWNHbzlNVEU0TURVM09UYzJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD0wYQ--",
-                        "9e1bb2700b79696770c9c931b182bf12260eb4e6");
+                new YahooApiInfo("dj0yJmk9SG1OeGxuQUhCdWxKJmQ9WVdrOVdGWkJOSEJDTldFbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1lNw--",
+                        "8e6b6c1e5f2d1f4e3b4fd74d428ae38c7a02a8e9");
 
         //OAuthConnection oAuthConn =  new OAuthConnection();
         //oAuthConn.initService(info);
@@ -63,7 +59,7 @@ public class Demo
                 TeamService teamService = (TeamService)factory.getService(ServiceType.TEAM);
                 PlayerService playerService = (PlayerService)factory.getService(ServiceType.PLAYER);
 
-                List<League> leagues = gameService.getUserLeagues("nfl");
+                List<League> leagues = gameService.getUserLeagues("nba");
                 for(League league : leagues)
                 {
                     System.out.println(league.toString());
@@ -89,26 +85,10 @@ public class Demo
                 for (Player p : demoRosterPlayersList)
                 {
                     System.out.println(p.getName().getFull());
-                    SeasonStat demoSeasonStats = playerService.getPlayerSeasonStats(p.getPlayer_key(), testLeauge.getLeague_key());
                     System.out.println("Stats for "+ p.getName().getFull());
-                    StatsList demoSeasonStatList = demoSeasonStats.getStats();
-                    LeagueStatCategories demoStatsCategories = demoLeagueSettings.getStat_categories();
-                    Map<String, StatCategory> demoStatCategoryMap = demoStatsCategories.getStats().getStatCategoryMap();
-                    for (Stat s : demoSeasonStatList.getStat())
-                    {
-                        StatCategory category = demoStatCategoryMap.get(s.getStat_id());
-                        System.out.println(category.getDisplay_name() +" (StatID "+s.getStat_id() +") : "+ s.getValue());
-                    }
                     System.out.println();
                 }
-                List<TeamStat> teamStats = teamService.getWeeklyTeamPointsForSeason(demoTeam.getTeam_key());
-                System.out.println("Team weekly points are:");
-                for(TeamStat teamStat : teamStats)
-                {
-                    System.out.println("Week : " + teamStat.getTeam_points().getWeek()+" Projected pts. : "+
-                            teamStat.getTeam_projected_points().getTotal()+" Actual pts. : "+
-                            teamStat.getTeam_points().getTotal());
-                }
+
                 List<RosterStats> rosterStatsList = teamService.getWeeklyTeamRosterPoints(demoTeam.getTeam_key(), 1);
                 for(RosterStats rosterStat : rosterStatsList)
                 {
